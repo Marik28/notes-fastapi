@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     postgres_host: str = "localhost"
     postgres_port: int = 5432
 
+    jwt_secret: str
+
 
 settings = Settings()
 DATABASE_URL = f"postgresql://{settings.postgres_username}:" \
