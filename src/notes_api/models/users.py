@@ -7,7 +7,7 @@ class BaseUser(BaseModel):
     email: EmailStr = Field(..., title="Email пользователя")
     username: str = Field(
         ...,
-        title="Юзернейм пользователя",
+        title="Имя пользователя",
         min_length=settings.username_min_length,
         max_length=settings.username_max_length
     )
