@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     postgres_port: int = 5432
 
     jwt_secret: str
+    jwt_expires_s: int = 3600
 
 
 settings = Settings()
