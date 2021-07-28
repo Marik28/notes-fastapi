@@ -1,5 +1,5 @@
 import datetime as dt
-from uuid import uuid4
+from uuid import UUID
 
 from pydantic import BaseModel, Field
 
@@ -12,9 +12,9 @@ class BaseNote(BaseModel):
 
 
 class Note(BaseNote):
-    id: uuid4
-    date_create: dt.time = Field(..., title="Время создания заметки")
-    date_update: dt.time = Field(..., title="Время последнего обновления заметки")
+    id: UUID
+    date_create: dt.datetime = Field(..., title="Время создания заметки. Unix timestamp")
+    date_update: dt.datetime = Field(..., title="Время последнего обновления заметки. Unix timestamp")
 
     class Config:
         orm_mode = True
