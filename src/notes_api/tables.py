@@ -27,19 +27,19 @@ class User(Base):
     password_hash = Column(String)
 
     __table_args__ = (
-        CheckConstraint(f"LENGTH(username) > {settings.username_min_length}",
-                        "username_min_length")
+        CheckConstraint(f"LENGTH(username) >= {settings.username_min_length}",
+                        "username_min_length"),
     )
 
 
 class Note(Base):
     __tablename__ = "notes"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4())
-    title = Column(String(length=settings.max_note_title_length))
-    text = Column(String(length=settings.max_note_text_length))
-    date_create = Column(TIMESTAMP, server_default=dt.datetime.now())
-    date_update = Column(TIMESTAMP, server_onupdate=dt.datetime.now())
-    owner_id = Column(Integer, ForeignKey("users.id"))
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    title = Column(String(length=settings.max_note_title_length), nullable=False)
+    text = Column(String(length=settings.max_note_text_length), nullable=False)
+    date_create = Column(TIMESTAMP, default=dt.datetime.utcnow, nullable=False)
+    date_update = Column(TIMESTAMP, default=dt.datetime.utcnow, onupdate=dt.datetime.utcnow, nullable=False)
+    owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
 
     owner = relationship("User", backref="notes")
