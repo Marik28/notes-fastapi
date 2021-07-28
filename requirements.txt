@@ -2,3 +2,8 @@ pydantic
 fastapi
 sqlalchemy
 uvicorn
+psycopg2-binary
+python-jose[cryptography]
+passlib[bcrypt]
+pydantic[email]
+python-multipart
