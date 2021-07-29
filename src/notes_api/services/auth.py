@@ -96,6 +96,7 @@ class AuthService:
             self.session.add(user)
             self.session.commit()
         except IntegrityError:
+            self.session.rollback()
             raise HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
                 detail="Пользователь с таким именем или email уже существует"
