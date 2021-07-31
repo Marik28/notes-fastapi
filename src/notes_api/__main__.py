@@ -1,7 +1,8 @@
 import uvicorn
 
-from .database import engine
-from .tables import Base
+from .settings import settings
 
-Base.metadata.create_all(engine)
-uvicorn.run("notes_api.app:app")
+uvicorn.run(
+    "notes_api.app:app",
+    debug=settings.debug,
+)
