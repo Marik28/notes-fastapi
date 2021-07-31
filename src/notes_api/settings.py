@@ -4,6 +4,7 @@ from pydantic import BaseSettings
 class Settings(BaseSettings):
     server_host: str = 'localhost'
     server_port: int = 8001
+    debug: bool = True
 
     max_note_title_length: int = 30
     max_note_text_length: int = 500
