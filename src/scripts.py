@@ -9,12 +9,18 @@ def create_tables():
     print(f"Таблицы в БД {settings.postgres_db_name} успешно созданы")
 
 
-available_commands = ["create_tables"]
+def create_jwt_secret():
+    import secrets
+    print(secrets.token_urlsafe(32))
+
+
+available_commands = ["create-tables", "create-jwt-secret"]
 parser = argparse.ArgumentParser()
 parser.add_argument("command", help="Команда, которую необходимо выполнить", choices=available_commands)
 
 command_to_function = {
-    "create_tables": create_tables,
+    "create-tables": create_tables,
+    "create-jwt-secret": create_jwt_secret,
 }
 
 if __name__ == '__main__':
