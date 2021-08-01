@@ -38,10 +38,11 @@ class NotesService:
         )
         return notes
 
-    def create(self, note_data: NoteCreate, user: User):
+    def create(self, note_data: NoteCreate, user: User) -> UUID:
         note = tables.Note(**note_data.dict(), owner_id=user.id)
         self.session.add(note)
         self.session.commit()
+        return note.id
 
     def update(self, note_id: UUID, note_new_data: NoteUpdate, user: User):
         note = self._get(note_id, user)
