@@ -5,8 +5,9 @@ from fastapi import (
     Depends,
     status,
     Path,
-    Response
+    Response,
 )
+from fastapi.responses import JSONResponse
 
 from ..models.notes import Note, NoteCreate, NoteUpdate
 from ..models.users import User
@@ -23,8 +24,9 @@ async def get_notes(service: NotesService = Depends(), user: User = Depends(get_
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_note(note_data: NoteCreate, service: NotesService = Depends(), user: User = Depends(get_current_user)):
-    # todo сделать header location с полным путем до созданной заметки
-    service.create(note_data, user)
+    created_note_id = str(service.create(note_data, user))
+    created_note_location = router.url_path_for("get_note", note_id=created_note_id)
+    return JSONResponse(status_code=status.HTTP_201_CREATED, headers={"Location": created_note_location})
 
 
 @router.put("/{note_id}", status_code=status.HTTP_204_NO_CONTENT, response_class=Response)
