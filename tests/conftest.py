@@ -34,6 +34,22 @@ def rnd_user_data(rnd_int_gen):
     }
 
 
+@pytest.fixture
+def note():
+    return {
+        "title": 'dsfsdfs',
+        "text": "sdfsdjfposidfusdof"
+    }
+
+
+@pytest.fixture
+def rnd_note_data(rnd_int_gen):
+    return {
+        "title": str(rnd_int_gen.randint(1000, 9999)),
+        "text": str(rnd_int_gen.randint(1000, 9999)),
+    }
+
+
 @pytest.fixture(scope="session")
 def token(user):
     response = client.post("/auth/sign-in/", data=user)
