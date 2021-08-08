@@ -9,7 +9,7 @@ from notes_api.models.auth import Token
 client = TestClient(app)
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def rnd_int_gen():
     return random.Random(123456)
 
