@@ -18,7 +18,6 @@ from ..services.notes import NotesService
 router = APIRouter(prefix="/notes")
 
 
-# todo добавить документацию для ответов с кодом UNAUTHORIZED
 @router.get(
     "/",
     response_model=list[Note],
