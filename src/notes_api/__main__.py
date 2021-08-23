@@ -5,4 +5,6 @@ from .settings import settings
 uvicorn.run(
     "notes_api.app:app",
     debug=settings.debug,
+    host=settings.server_host,
+    port=settings.server_port,
 )

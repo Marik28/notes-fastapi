@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     server_host: str = 'localhost'
     server_port: int = 8001
     debug: bool = True
+    origins: list[str] = ["127.0.0.1"]
 
     max_note_title_length: int = 30
     max_note_text_length: int = 500
